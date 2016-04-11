@@ -1,0 +1,229 @@
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NewsReel</title>
+
+    <!-- CSS IMPORTS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/offcanvas.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'packery/packery.pkgd.min.js' %}"></script>
+    <script src="{% static 'packery/draggabilly.pkgd.min.js' %}"></script>
+
+
+    <!-- PACKERY/DRAGGABILITY -->
+    <script>
+    $(function() {
+      var $container = $('#comment-container');
+      $container.packery({
+        itemSelector: '.col-xs-6',
+        columnWidth: $container.find('.col-xs-6')[0],
+      });
+
+      // get item elements, jQuery-ify them
+      var $itemElems = $($container.packery('getItemElements'));
+      // make item elements draggable
+      $itemElems.each(function(i, itemElem) {
+        // make element draggable with Draggabilly
+        var draggie = new Draggabilly(itemElem);
+        // bind Draggabilly events to Packery
+        $container.packery('bindDraggabillyEvents', draggie);
+      });
+    // bind Draggable events to Packery
+    $container.packery('bindUIDraggableEvents', $itemElems);
+    // stamp item after dragging
+    $container.packery('on', 'dragItemPositioned', function(pckryInstance, draggedItem) {
+      setTimeout(function() {
+        $container.packery();
+        }, 50);
+      });
+    });
+
+    </script>
+
+
+</head>
+      {% if user.is_authenticated %}
+
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="{% static 'images/Logo.png' %}" alt="News Reel" style="width:32px; height:32px; margin-top:-5px;"> </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#profile">{{ c_user.first_name }}</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+
+        <div class="col-xs-4 col-sm-2 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+
+          <div class="row" id='comment-container'>
+            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Politics</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Sport</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Business</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Lifestyle</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Fashion</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->            <div class="col-xs-6 col-lg-4">
+              <div class = "comment">
+              <h2>Culture</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+          </div><!--/row-->
+        </div><!--/.col-xs-12.col-sm-9-->
+      
+      </div><!--/row-->  
+
+      <hr>
+
+
+      <footer>
+        <p>&copy; 2016 The Encyclopaedophiles, Inc.</p>
+      </footer>
+
+    </div><!--/.container--> 
+
+
+    <!-- Bootstrap core JavaScript
+    ==================================================
+    Placed at the end of the document so the pages load faster -->
+
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+  </body>
+
+
+
+
+
+
+{% else %}
+<body background="{% static 'images/251H.jpg' %}">
+
+    <nav class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="{% static 'images/Logo.png' %}" alt="News Reel" style="width:32px; height:32px; margin-top:-5px;"> </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#login">Sign in</a></li>
+            <li><a href="#profile">{{ c_user.first_name }}</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+
+    <div class="container" id="parent">
+      <div id="child">
+        <form id="user_form" method="POST" enctype="multipart/form-data" class="form-signin"> {% csrf_token %}
+             <h2 class="form-signin-heading" >Get Started</h2>
+
+            <!--  action="/blog/register/" Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+            <input class="form-control" type="email" name="email" placeholder="Email"/>
+            <input class="form-control" type="username" name="username" placeholder="Username"/>
+            <input class="form-control" type="password" name="password" placeholder="Password"/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Register">Sign Up</button>
+        </form>
+      </div>  <!--/.child-->
+        </div><!--/.container-->
+
+  <footer>
+    <p style="text-align:center">&copy; 2016 The Encyclopaedophiles, Inc.</p>
+  </footer>
+
+    <!-- Bootstrap core JavaScript
+    ==================================================
+    Placed at the end of the document so the pages load faster -->
+
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+  </body>
+
+
+{% endif %}
+</html>
+
