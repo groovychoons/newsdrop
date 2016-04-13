@@ -3,51 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NewsDrop</title>
+    <title>NewsReel</title>
 
     <!-- CSS IMPORTS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/offcanvas.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'packery/packery.pkgd.min.js' %}"></script>
-    <script src="{% static 'packery/draggabilly.pkgd.min.js' %}"></script>
-
-
-    <!-- PACKERY/DRAGGABILITY -->
-    <script>
-    $(function() {
-      var $container = $('#comment-container');
-      $container.packery({
-        itemSelector: '.col-xs-6',
-        columnWidth: $container.find('.col-xs-6')[0],
-      });
-
-      // get item elements, jQuery-ify them
-      var $itemElems = $($container.packery('getItemElements'));
-      // make item elements draggable
-      $itemElems.each(function(i, itemElem) {
-        // make element draggable with Draggabilly
-        var draggie = new Draggabilly(itemElem);
-        // bind Draggabilly events to Packery
-        $container.packery('bindDraggabillyEvents', draggie);
-      });
-    // bind Draggable events to Packery
-    $container.packery('bindUIDraggableEvents', $itemElems);
-    // stamp item after dragging
-    $container.packery('on', 'dragItemPositioned', function(pckryInstance, draggedItem) {
-      setTimeout(function() {
-        $container.packery();
-        }, 50);
-      });
-    });
-
-    </script>
 
 </head>
 
-<body>
+<body background="{% static 'images/251H.jpg' %}">
+
     <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -57,23 +25,28 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="{% static 'images/Logo.png' %}" alt="News Reel" style="width:32px; height:32px; margin-top:-5px;"> </a>
+          <a class="navbar-brand" href="{% url 'news_display' %}"><img src="{% static 'images/Logo.png' %}" alt="News Reel" style="width:32px; height:32px; margin-top:-5px;"> </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#profile">{{ c_user.first_name }}</a></li>
+            <li class="active"><a href="{% url 'news_display' %}">Back</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
 
 
+    <div class="container" id="parent" style="padding:50px;">
+      <div id="child">
+        <form id="login_form" method="POST" enctype="multipart/form-data" class="form-signin"> {% csrf_token %}
+             <h2 class="form-signin-heading" >Sign In</h2>
+            <input class="form-control" type="text" name="username" placeholder="Username"/>
+            <input class="form-control" type="password" name="password" placeholder="Password"/>
 
-    {% block content %}
-    {% endblock %}
-
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="submit">Log in</button>
+        </form>
+      </div>  <!--/.child-->
+        </div><!--/.container-->
 
   <footer>
     <p style="text-align:center">&copy; 2016 The Encyclopaedophiles, Inc.</p>
@@ -88,5 +61,8 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="offcanvas.js"></script>
-</body>
+  </body>
+
+
 </html>
+

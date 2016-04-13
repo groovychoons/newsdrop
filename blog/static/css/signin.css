@@ -1,12 +1,13 @@
 
 
 .form-signin {
-  border-radius: 25px;
+  border-radius: 23px;
   max-width: 330px;
-  padding: 15px;
+  padding: 18px;
   margin: auto auto;
   background-color:white;
   text-align: center;
+  box-shadow: 5px 5px 5px #111;
 }
 
 .form-signin .form-signin-heading,
@@ -52,3 +53,4 @@
      display: table-cell;
      vertical-align: middle; 
 }
+
