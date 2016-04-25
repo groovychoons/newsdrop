@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name='login'),
 	url(r'^logout/$', views.user_logout, name='logout'),
 	url(r'^categories/$', views.categories, name='categories'),
+	url(r'^rssfeeds/$', views.newspapers, name='newspapers'),
 
 
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),

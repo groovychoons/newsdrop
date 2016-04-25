@@ -60,7 +60,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="{% static 'images/Logo.png' %}" alt="News Drop" style="width:32px; height:32px; margin-top:-5px;"> </a>
+          <a class="navbar-brand" href="{% url 'news_display' %}"><img src="{% static 'images/Logo.png' %}" alt="News Drop" style="width:32px; height:32px; margin-top:-5px;"> </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -196,7 +196,9 @@
 
     <div class="container" id="parent" style="padding:50px;">
       <div id="child">
+
         <form id="user_form" method="POST" enctype="multipart/form-data" class="form-signin"> {% csrf_token %}
+                  <img src="{% static 'images/logo.jpg' %}" alt="News Reel" style="width:180px; height:180px;">
              <h2 class="form-signin-heading" >Get Started</h2>
 
             <!--  action="/blog/register/" Display each form. The as_p method wraps each element in a paragraph

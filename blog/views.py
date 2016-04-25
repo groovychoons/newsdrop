@@ -49,6 +49,10 @@ def home(request):
 def categories(request):
 	return render(request, 'blog/categories_select.html',)
 
+
+def newspapers(request):
+	return render(request, 'blog/newspapers_select.html',)
+
 def register(request):
 	# A boolean value for telling the template whether the registration was successful.
 	# Set to False initially. Code changes value to True when registration succeeds.
